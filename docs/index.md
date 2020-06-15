@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [ts-playground](./ts-playground.md) | ts-playground |
+|  [ts-github-tools](./ts-github-tools.md) | ts-github-tools |
 
