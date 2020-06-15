@@ -6,18 +6,18 @@
     "oldestForwardsCompatibleVersion": 1001
   },
   "kind": "Package",
-  "canonicalReference": "ts-playground!",
-  "docComment": "/**\n * ts-playground\n *\n * @packageDocumentation\n */\n",
-  "name": "ts-playground",
+  "canonicalReference": "ts-github-tools!",
+  "docComment": "/**\n * ts-github-tools\n *\n * @packageDocumentation\n */\n",
+  "name": "ts-github-tools",
   "members": [
     {
       "kind": "EntryPoint",
-      "canonicalReference": "ts-playground!",
+      "canonicalReference": "ts-github-tools!",
       "name": "",
       "members": [
         {
           "kind": "Function",
-          "canonicalReference": "ts-playground!normalizeBranchName:function(1)",
+          "canonicalReference": "ts-github-tools!normalizeBranchName:function(1)",
           "docComment": "/**\n * normalize `branch name`\n *\n * @param branch - `branch name`\n *\n * @returns normalized `branch name`\n *\n * @example\n * ```ts\n * const branch = normalizeBranchName(`refs/heads/master`);\n *\n * expect(branch).toEqual('master');\n * ```\n *\n * @public\n */\n",
           "excerptTokens": [
             {

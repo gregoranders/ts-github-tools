@@ -1,16 +1,16 @@
 {
-  "name": "ts-playground",
-  "version": "0.0.14",
-  "description": "TypeScript Playground",
+  "name": "ts-github-tools",
+  "version": "0.0.1",
+  "description": "TypeScript GitHub Tools",
   "author": "Gregor Anders <gregor.anders@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gregoranders/ts-playground/issues"
+    "url": "https://github.com/gregoranders/ts-github-tools/issues"
   },
-  "homepage": "https://gregoranders.github.io/ts-playground/",
+  "homepage": "https://gregoranders.github.io/ts-github-tools/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gregoranders/ts-playground.git"
+    "url": "git+https://github.com/gregoranders/ts-github-tools.git"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -58,7 +58,7 @@
     ]
   },
   "jest-html-reporter": {
-    "pageTitle": "ts-playground",
+    "pageTitle": "ts-github-tools",
     "outputPath": "<rootDir>/temp/index.html"
   },
   "jest-junit": {
