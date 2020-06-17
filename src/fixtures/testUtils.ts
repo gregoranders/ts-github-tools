@@ -1,4 +1,4 @@
-import { getOctokit } from '@actions/github';
+// import { getOctokit } from '@actions/github';
 import tweetnacl from 'tweetnacl';
 
 import { OctokitOptions } from '@actions/github/node_modules/@octokit/core/dist-types/types';
@@ -15,19 +15,26 @@ export const key = { key_id: '123', key: uint8Array2string(keyPair.publicKey) };
 
 export const mockedSetToken = jest.fn();
 
-export const mockedLog = {
-  info: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn(),
+export const context = {
+  owner: 'owner',
+  repo: 'repo',
 };
 
-const createMock = <
+type MockedType<
   K extends keyof Endpoints,
   R = Promise<DeepPartial<Endpoints[K]['response']>>,
   P = Endpoints[K]['parameters']
->(): jest.Mock<R, [P]> => {
-  return jest.fn<R, [P]>();
+> = jest.Mock<R, [P]>;
+
+const createMock = <K extends keyof Endpoints>(): MockedType<K> => {
+  return jest.fn();
 };
+
+jest.mock('@actions/github');
+
+import * as Octokit from '@actions/github';
+
+const octokit = Octokit as jest.Mocked<typeof Octokit>;
 
 const mockedOctokit = {
   issues: {
@@ -41,24 +48,22 @@ const mockedOctokit = {
   },
 };
 
-export const mockedGetOctokit = jest.fn<typeof mockedOctokit, Parameters<typeof getOctokit>>(
-  (token: string, options?: OctokitOptions) => {
-    mockedSetToken(token, options);
-    return mockedOctokit;
-  },
-);
+type MockedGetOctokit = (
+  token: string,
+  options?: OctokitOptions,
+) => ReturnType<typeof Octokit.getOctokit> & typeof mockedOctokit;
 
-export const context = {
-  // eslint-disable-next-line no-warning-comments
-  // TODO: set to typeof mockedOctokit when working on tests otherwise any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  client: (mockedGetOctokit.getMockImplementation()('') as unknown) as jest.Mocked<ReturnType<typeof getOctokit>>,
-  owner: 'owner',
-  repo: 'repo',
+export const getOctokit = octokit.getOctokit.mockImplementation((token, options?) => {
+  mockedSetToken(token, options);
+  return mockedOctokit as ReturnType<MockedGetOctokit>;
+}) as jest.MockedFunction<jest.MockedFunction<MockedGetOctokit>>;
+
+export const client = getOctokit('123');
+
+export const mockedLog = {
+  info: jest.fn(),
+  error: jest.fn(),
+  warn: jest.fn(),
 };
-
-jest.mock('@actions/github', () => ({
-  getOctokit: mockedGetOctokit,
-}));
 
 jest.mock('fancy-log', () => mockedLog);

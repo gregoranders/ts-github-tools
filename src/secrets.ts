@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 import tweetsodium from 'tweetsodium';
-import { Context, create as commonCreate, ensure as commonEnsure } from './common';
+import { Context, ClientType, create as commonCreate, ensure as commonEnsure } from './common';
 
 export type Secret = {
   name: string;
@@ -13,8 +13,8 @@ export type Secret = {
 
 const string2uint8Array = (text: string) => Uint8Array.from(text.split('').map((ch) => ch.charCodeAt(0)));
 
-export const create = (context: Context, secret: Secret): Promise<void> => {
-  const { client, owner, repo } = context;
+export const create = (client: ClientType, context: Context, secret: Secret): Promise<void> => {
+  const { owner, repo } = context;
   return commonCreate(context, secret, 'secret', async () => {
     const key = await client.actions.getRepoPublicKey({ owner, repo });
     const messageBytes = string2uint8Array(secret.name);
@@ -31,9 +31,9 @@ export const create = (context: Context, secret: Secret): Promise<void> => {
   });
 };
 
-export const ensure = async (context: Context, requested: Secret[]): Promise<void> => {
-  const { client, owner, repo } = context;
+export const ensure = async (client: ClientType, context: Context, requested: Secret[]): Promise<void> => {
+  const { owner, repo } = context;
   const response = await client.actions.listRepoSecrets({ owner, repo });
   const present = response.data.secrets.map((secret: { name: string }) => secret.name);
-  return commonEnsure({ client, owner, repo }, { present, requested, create, label: 'Secret' });
+  return commonEnsure(client, context, { present, requested, create, label: 'Secret' });
 };

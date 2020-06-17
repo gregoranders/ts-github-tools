@@ -59,8 +59,8 @@ export const main = async (proc: typeof process): Promise<void> => {
   const client = getClient(proc.env.GITHUB_TOKEN);
   const context = { client, owner, repo };
 
-  await ensureLabels(context, CUSTOM_LABELS);
-  await ensureSecrets(context, secrets);
+  await ensureLabels(client, context, CUSTOM_LABELS);
+  await ensureSecrets(client, context, secrets);
 };
 
 main(process);

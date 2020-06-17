@@ -16,10 +16,9 @@ type Response = {
 // TODO: set to ReturnType<typeof Octokit.getOctokit> when NOT working
 //       on tests otherwise ReturnType<typeof Octokit.getOctokit> & any
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ClientType = ReturnType<typeof Octokit.getOctokit> & any;
+export type ClientType = ReturnType<typeof Octokit.getOctokit>;
 
-export type Context<T = ClientType> = {
-  client: T;
+export type Context = {
   owner: string;
   repo: string;
 };
@@ -42,9 +41,10 @@ export async function create<T extends Request, R extends Response>(
   }
 }
 
-export type EnsureCreateFunction<T extends Request> = (context: Context, entry: T) => Promise<void>;
+export type EnsureCreateFunction<T extends Request> = (client: ClientType, context: Context, entry: T) => Promise<void>;
 
 export async function ensure<T extends Request>(
+  client: ClientType,
   context: Context,
   ensureContext: {
     present: string[];
@@ -65,7 +65,7 @@ export async function ensure<T extends Request>(
         }
         return true;
       })
-      .map((temp) => create(context, temp)),
+      .map((temp) => create(client, context, temp)),
   );
 }
 

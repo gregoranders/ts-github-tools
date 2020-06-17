@@ -3,7 +3,7 @@
  *
  * @packageDocumentation
  */
-import { Context, create as commonCreate, ensure as commonEnsure } from './common';
+import { Context, ClientType, create as commonCreate, ensure as commonEnsure } from './common';
 
 export type Label = {
   name: string;
@@ -11,16 +11,16 @@ export type Label = {
   color: string;
 };
 
-export const create = (context: Context, label: Label): Promise<void> => {
+export const create = (client: ClientType, context: Context, label: Label): Promise<void> => {
   return commonCreate(context, label, 'label', async () => {
-    const { client, owner, repo } = context;
+    const { owner, repo } = context;
     return client.issues.createLabel({ owner, repo, ...label });
   });
 };
 
-export const ensure = async (context: Context, requested: Label[]): Promise<void> => {
-  const { client, owner, repo } = context;
+export const ensure = async (client: ClientType, context: Context, requested: Label[]): Promise<void> => {
+  const { owner, repo } = context;
   const response = await client.issues.listLabelsForRepo({ owner, repo });
   const present = response.data.map((label: { name: string }) => label.name);
-  return commonEnsure(context, { present, requested, create, label: 'Label' });
+  return commonEnsure(client, context, { present, requested, create, label: 'Label' });
 };

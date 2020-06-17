@@ -1,10 +1,10 @@
-import { mockedLog, key, context } from './fixtures/testUtils';
+import { mockedLog, key, context, client } from './fixtures/testUtils';
 
 import { create, ensure } from './secrets';
 
 describe('ts-github-tools', () => {
   describe('secrets', () => {
-    const { client, repo, owner } = context;
+    const { repo, owner } = context;
     const secret = {
       name: 'test',
       value: 'test',
@@ -20,7 +20,7 @@ describe('ts-github-tools', () => {
           data: key,
         });
         client.actions.createOrUpdateRepoSecret.mockResolvedValue({ status: 201 });
-        await expect(create(context, secret)).resolves.toBeUndefined();
+        await expect(create(client, context, secret)).resolves.toBeUndefined();
         expect(client.actions.getRepoPublicKey).toHaveBeenNthCalledWith(1, { owner, repo });
         expect(client.actions.createOrUpdateRepoSecret).toHaveBeenCalledTimes(1);
         expect(mockedLog.info).toHaveBeenNthCalledWith(1, `Created secret 'test' in 'owner/repo'`);
@@ -31,7 +31,7 @@ describe('ts-github-tools', () => {
           data: key,
         });
         client.actions.createOrUpdateRepoSecret.mockResolvedValue({ status: 200 });
-        await expect(create(context, secret)).resolves.toBeUndefined();
+        await expect(create(client, context, secret)).resolves.toBeUndefined();
         expect(client.actions.getRepoPublicKey).toHaveBeenNthCalledWith(1, { owner, repo });
         expect(client.actions.createOrUpdateRepoSecret).toHaveBeenCalledTimes(1);
         expect(mockedLog.error).toHaveBeenNthCalledWith(1, `Unable to create secret 'test' in 'owner/repo'`);
@@ -45,7 +45,7 @@ describe('ts-github-tools', () => {
           data: key,
         });
         client.actions.createOrUpdateRepoSecret.mockResolvedValue({ status: 201 });
-        await expect(ensure(context, [secret])).resolves.toBeUndefined();
+        await expect(ensure(client, context, [secret])).resolves.toBeUndefined();
         expect(client.actions.listRepoSecrets).toHaveBeenNthCalledWith(1, { owner, repo });
         expect(client.actions.getRepoPublicKey).toHaveBeenNthCalledWith(1, { owner, repo });
         expect(client.actions.createOrUpdateRepoSecret).toHaveBeenCalledTimes(1);
@@ -58,7 +58,7 @@ describe('ts-github-tools', () => {
         client.actions.getRepoPublicKey.mockResolvedValue({
           data: key,
         });
-        await expect(ensure(context, [secret])).resolves.toBeUndefined();
+        await expect(ensure(client, context, [secret])).resolves.toBeUndefined();
         expect(client.actions.createOrUpdateRepoSecret).toHaveBeenCalledTimes(0);
         expect(mockedLog.warn).toHaveBeenNthCalledWith(1, `Secret 'test' already found in 'owner/repo'`);
       });

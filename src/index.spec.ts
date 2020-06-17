@@ -1,8 +1,8 @@
-import { context, mockedLog, mockedSetToken } from './fixtures/testUtils';
+import { context, mockedLog, mockedSetToken, client } from './fixtures/testUtils';
 
 describe('ts-github-tools', () => {
   describe('index', () => {
-    const { client, repo, owner } = context;
+    const { repo, owner } = context;
 
     beforeEach(() => {
       jest.clearAllMocks();
