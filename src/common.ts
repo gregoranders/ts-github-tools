@@ -12,10 +12,6 @@ type Response = {
   status: number;
 };
 
-// eslint-disable-next-line no-warning-comments
-// TODO: set to ReturnType<typeof Octokit.getOctokit> when NOT working
-//       on tests otherwise ReturnType<typeof Octokit.getOctokit> & any
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ClientType = ReturnType<typeof Octokit.getOctokit>;
 
 export type Context = {
