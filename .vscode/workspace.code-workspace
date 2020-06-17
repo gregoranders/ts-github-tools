@@ -32,7 +32,8 @@
       "esbenp.prettier-vscode",
       "rvest.vs-code-prettier-eslint",
       "pflannery.vscode-versionlens",
-      "visualstudioexptteam.vscodeintellicode"
+      "visualstudioexptteam.vscodeintellicode",
+      "ms-vscode.github-issues-prs"
     ]
   }
 }
