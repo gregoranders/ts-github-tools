@@ -6,5 +6,5 @@
   "editor.wordWrapColumn": 78,
   "eslint.validate": ["javascript", "typescript"],
   "editor.formatOnSave": true,
-  "files.associations": { "*.json": "jsonc" }
+  "files.associations": { "api-extractor.json": "jsonc" }
 }
