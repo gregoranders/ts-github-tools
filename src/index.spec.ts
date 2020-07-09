@@ -29,7 +29,7 @@ describe('ts-github-tools', () => {
         });
       });
 
-      it(`should do nothing`, async () => {
+      it(`should do nothing when labels and secret exist`, async () => {
         process.env = {
           GITHUB_TOKEN: 'token',
         };
@@ -52,6 +52,20 @@ describe('ts-github-tools', () => {
         expect(client.actions.getRepoPublicKey).not.toHaveBeenCalled();
         expect(client.actions.createOrUpdateRepoSecret).not.toHaveBeenCalled();
         expect(client.issues.createLabel).not.toHaveBeenCalled();
+      });
+
+      it('should log error', async () => {
+        process.env = {
+          GITHUB_TOKEN: 'token',
+        };
+        process.argv = ['', '', `${owner}/${repo}`, '1223'];
+
+        client.actions.listRepoSecrets.mockRejectedValue(Error('error'));
+
+        const testSubject = await import('./index');
+
+        await testSubject.main(process);
+        expect(mockedLog.error).toHaveBeenNthCalledWith(1, Error('error'));
       });
     });
   });

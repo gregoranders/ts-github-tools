@@ -56,11 +56,17 @@ export const main = async (proc: typeof process): Promise<void> => {
 
   const secrets = [{ name: 'CC_TEST_REPORTER_ID', value: proc.argv[3] }];
 
-  const client = getClient(proc.env.GITHUB_TOKEN);
-  const context = { client, owner, repo };
+  log.info(`Owner: ${owner} Repo: ${repo}`);
 
-  await ensureLabels(client, context, CUSTOM_LABELS);
-  await ensureSecrets(client, context, secrets);
+  try {
+    const client = getClient(proc.env.GITHUB_TOKEN);
+    const context = { client, owner, repo };
+
+    await ensureLabels(client, context, CUSTOM_LABELS);
+    await ensureSecrets(client, context, secrets);
+  } catch (error) {
+    log.error(error);
+  }
 };
 
 main(process);

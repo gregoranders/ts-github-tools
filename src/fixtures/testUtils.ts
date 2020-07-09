@@ -1,7 +1,7 @@
 // import { getOctokit } from '@actions/github';
 import tweetnacl from 'tweetnacl';
 
-import { OctokitOptions } from '@actions/github/node_modules/@octokit/core/dist-types/types';
+import { OctokitOptions } from '@octokit/core/dist-types/types';
 
 import { Endpoints } from '@octokit/types';
 
