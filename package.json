@@ -139,7 +139,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "26.2.0",
     "ts-node": "8.10.2",
-    "tsdef": "0.0.13",
+    "tsdef": "0.0.14",
     "tweetnacl": "1.0.3",
     "tweetsodium": "0.0.5",
     "typescript": "3.9.7"
