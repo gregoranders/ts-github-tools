@@ -2,6 +2,13 @@
 
 Tools used for setting up a `repository`.
 
+- create
+  - labels
+    - `npm dependencies`
+    - `code quality`
+  - secret
+    - `CC_TEST_REPORTER_ID`
+
 ## [API Docs](./docs/index.md)
 
 [![Dependency Status][daviddm-image]][daviddm-url]
@@ -27,6 +34,12 @@ Tools used for setting up a `repository`.
 | [![ReleaseMaster Build][release-build-image]][release-url]       |                                                              |                                                                  |                                                                  |                                                                            | [![Release][release-image]][release-url]                                     |
 | [![Master Build][master-build-image]][master-url]                | [![Master Build][travis-master-image]][travis-url]           | [![Master Build][circleci-master-image]][circleci-url]           | [![Master Build][appveyor-master-image]][appveyor-url]           | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
 | [![Development Build][development-build-image]][development-url] | [![Development Build][travis-development-image]][travis-url] | [![Development Build][circleci-development-image]][circleci-url] | [![Development Build][appveyor-development-image]][appveyor-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
+
+### Example
+
+```sh
+npm start [owner]/[repo] [CC_TEST_REPORTER_ID]
+```
 
 ### Clone repository
 

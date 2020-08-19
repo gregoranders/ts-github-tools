@@ -10,7 +10,7 @@ plugins:
     config:
       config: .eslintrc-cc.json
   fixme:
-    enabled: true
+    enabled: false
   git-legal:
     enabled: true
 exclude_patterns:
@@ -21,3 +21,4 @@ exclude_patterns:
   - '**/temp'
   - '**/docs'
   - '**/node_modules/'
+  - '**/*.spec.ts'
