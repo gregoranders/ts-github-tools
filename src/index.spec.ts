@@ -38,7 +38,13 @@ describe('ts-github-tools', () => {
         const testSubject = await import('./index');
 
         client.actions.listRepoSecrets.mockResolvedValue({
-          data: { secrets: [{ name: 'CC_TEST_REPORTER_ID', created_at: '', updated_at: '' }], total_count: 1 },
+          data: {
+            secrets: [
+              { name: 'CC_TEST_REPORTER_ID', created_at: '', updated_at: '' },
+              { name: 'CODACY_PROJECT_TOKEN', created_at: '', updated_at: '' },
+            ],
+            total_count: 1,
+          },
         });
 
         client.issues.listLabelsForRepo.mockResolvedValue({

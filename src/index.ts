@@ -9,6 +9,7 @@
  *     - `code quality`
  *   - secret
  *     - `CC_TEST_REPORTER_ID`
+ *     - `CODACY_PROJECT_TOKEN`
  *
  * @packageDocumentation
  */
@@ -36,7 +37,7 @@ export const CUSTOM_LABELS = [
 /**
  * @internal
  */
-export const HELP = `Usage: ${process.argv[1]} [owner]/[repo] [CC_TEST_REPORTER_ID]`;
+export const HELP = `Usage: ${process.argv[1]} [owner]/[repo] [CC_TEST_REPORTER_ID] [CODACY_PROJECT_TOKEN]`;
 
 /**
  * @internal
@@ -54,7 +55,10 @@ export const main = async (proc: typeof process): Promise<void> => {
     return;
   }
 
-  const secrets = [{ name: 'CC_TEST_REPORTER_ID', value: proc.argv[3] }];
+  const secrets = [
+    { name: 'CC_TEST_REPORTER_ID', value: proc.argv[3] },
+    { name: 'CODACY_PROJECT_TOKEN', value: proc.argv[4] },
+  ];
 
   log.info(`Owner: ${owner} Repo: ${repo}`);
 
