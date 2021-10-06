@@ -114,7 +114,7 @@
     "@octokit/rest": "18.0.3"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.8.29",
+    "@microsoft/api-documenter": "7.13.57",
     "@microsoft/api-extractor": "7.9.6",
     "@octokit/types": "5.4.0",
     "@types/fancy-log": "1.3.1",
