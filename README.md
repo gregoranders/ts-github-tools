@@ -32,11 +32,11 @@ Tools used for setting up a `repository`.
 - [AppVeyor][appveyor-url] Integration
 - Code Quality via [Code Climate](./docs/CODECLIMATE.md) and [Codacy](./docs/CODACY.md)
 
-| GitHub                                                           | Travis                                                       | CircleCI                                                         | AppVeyor                                                         | Coveralls                                                                  |                                                                              |
-| ---------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [![ReleaseMaster Build][release-build-image]][release-url]       |                                                              |                                                                  |                                                                  |                                                                            | [![Release][release-image]][release-url]                                     |
-| [![Master Build][master-build-image]][master-url]                | [![Master Build][travis-master-image]][travis-url]           | [![Master Build][circleci-master-image]][circleci-url]           | [![Master Build][appveyor-master-image]][appveyor-url]           | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
-| [![Development Build][development-build-image]][development-url] | [![Development Build][travis-development-image]][travis-url] | [![Development Build][circleci-development-image]][circleci-url] | [![Development Build][appveyor-development-image]][appveyor-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| GitHub                                                           | CircleCI                                                         | AppVeyor                                                         | Coveralls                                                                  |                                                                              |
+| [![ReleaseMaster Build][release-build-image]][release-url]       |                                                                  |                                                                  |                                                                            | [![Release][release-image]][release-url]                                     |
+| [![Master Build][master-build-image]][master-url]                | [![Master Build][circleci-master-image]][circleci-url]           | [![Master Build][appveyor-master-image]][appveyor-url]           | [![Master Coverage][master-coveralls-image]][master-coveralls-url]         | [![Master Version][master-version-image]][master-version-url]                |
+| [![Development Build][development-build-image]][development-url] | [![Development Build][circleci-development-image]][circleci-url] | [![Development Build][appveyor-development-image]][appveyor-url] | [![Test Coverage][development-coveralls-image]][development-coveralls-url] | [![Development Version][development-version-image]][development-version-url] |
 
 ### Example
 
@@ -99,10 +99,6 @@ npm run clear
 [development-url]: https://github.com/gregoranders/ts-github-tools/tree/development
 [repository-url]: https://github.com/gregoranders/ts-github-tools
 [code-metric-url]: https://github.com/gregoranders/ts-github-tools/search?l=TypeScript
-[travis-url]: https://travis-ci.org/gregoranders/ts-github-tools
-[travis-image]: https://travis-ci.org/gregoranders/ts-github-tools.svg?branch=master
-[daviddm-url]: https://david-dm.org/gregoranders/ts-github-tools
-[daviddm-image]: https://david-dm.org/gregoranders/ts-github-tools.svg?branch=master
 [license-url]: https://github.com/gregoranders/ts-github-tools/blob/master/LICENSE
 [license-image]: https://img.shields.io/github/license/gregoranders/ts-github-tools.svg
 [master-version-url]: https://github.com/gregoranders/ts-github-tools/blob/master/package.json
