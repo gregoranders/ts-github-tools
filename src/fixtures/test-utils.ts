@@ -23,7 +23,7 @@ export const context = {
 type MockedType<
   K extends keyof Endpoints,
   R = Promise<DeepPartial<Endpoints[K]['response']>>,
-  P = Endpoints[K]['parameters']
+  P = Endpoints[K]['parameters'],
 > = jest.Mock<R, [P]>;
 
 const createMock = <K extends keyof Endpoints>(): MockedType<K> => {
@@ -37,14 +37,16 @@ import * as Octokit from '@actions/github';
 const octokit = Octokit as jest.Mocked<typeof Octokit>;
 
 const mockedOctokit = {
-  issues: {
-    createLabel: createMock<'POST /repos/:owner/:repo/labels'>(),
-    listLabelsForRepo: createMock<'GET /repos/:owner/:repo/labels'>(),
-  },
-  actions: {
-    getRepoPublicKey: createMock<'GET /repos/:owner/:repo/actions/secrets/public-key'>(),
-    createOrUpdateRepoSecret: createMock<'PUT /repos/:owner/:repo/actions/secrets/:secret_name'>(),
-    listRepoSecrets: createMock<'GET /repos/:owner/:repo/actions/secrets'>(),
+  rest: {
+    issues: {
+      createLabel: createMock<'POST /repos/{owner}/{repo}/labels'>(),
+      listLabelsForRepo: createMock<'GET /repos/{owner}/{repo}/labels'>(),
+    },
+    actions: {
+      getRepoPublicKey: createMock<'GET /repos/{owner}/{repo}/actions/secrets/public-key'>(),
+      createOrUpdateRepoSecret: createMock<'PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}'>(),
+      listRepoSecrets: createMock<'GET /repos/{owner}/{repo}/actions/secrets'>(),
+    },
   },
 };
 

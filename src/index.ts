@@ -28,6 +28,11 @@ export const CUSTOM_LABELS = [
     color: 'dd0000',
   },
   {
+    name: 'github action',
+    description: 'GitHub action dependencies',
+    color: 'dd0000',
+  },
+  {
     name: 'code quality',
     description: 'Code Quality',
     color: '00dd00',

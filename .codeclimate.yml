@@ -1,4 +1,8 @@
 version: '2'
+checks:
+  file-lines:
+    config:
+      threshold: 1000
 plugins:
   editorconfig:
     enabled: true
@@ -6,19 +10,23 @@ plugins:
     enabled: false
   eslint:
     enabled: true
-    channel: 'eslint-6'
     config:
       config: .eslintrc-cc.json
   fixme:
-    enabled: false
+    enabled: true
   git-legal:
     enabled: true
 exclude_patterns:
   - '**/.github'
   - '**/.circleci'
   - '**/.vscode'
+  - '**/*.svg'
+  - '**/*.spec.ts'
   - '**/dist'
   - '**/temp'
+  - '**/test'
   - '**/docs'
+  - '**/docs-tmp'
   - '**/node_modules/'
-  - '**/*.spec.ts'
+  - '**/.husky'
+  - '**/commitlint.config.js'

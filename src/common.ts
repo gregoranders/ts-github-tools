@@ -2,8 +2,6 @@ import log from 'fancy-log';
 
 import * as Octokit from '@actions/github';
 
-export { log };
-
 type Request = {
   name: string;
 };
@@ -29,10 +27,9 @@ export async function create<T extends Request, R extends Response>(
 ): Promise<void> {
   const { owner, repo } = context;
   try {
-    const response = await createFunction();
-    if (response.status !== 201) throw Error;
+    await createFunction();
     log.info(`Created ${label} '${entry.name}' in '${owner}/${repo}'`);
-  } catch (error) {
+  } catch {
     log.error(`Unable to create ${label} '${entry.name}' in '${owner}/${repo}'`);
   }
 }
@@ -54,15 +51,17 @@ export async function ensure<T extends Request>(
 
   await Promise.all(
     requested
-      .filter((temp) => {
-        if (present.includes(temp.name)) {
-          log.warn(`${label} '${temp.name}' already found in '${owner}/${repo}'`);
+      .filter((temporary) => {
+        if (present.includes(temporary.name)) {
+          log.warn(`${label} '${temporary.name}' already found in '${owner}/${repo}'`);
           return false;
         }
         return true;
       })
-      .map((temp) => create(client, context, temp)),
+      .map((temporary) => create(client, context, temporary)),
   );
 }
 
 export default Octokit.getOctokit;
+
+export { default as log } from 'fancy-log';

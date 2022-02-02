@@ -5,29 +5,32 @@ Tools used for setting up a `repository`.
 - create
   - labels
     - `npm dependencies`
+    - `github action`
     - `code quality`
   - secret
     - `CC_TEST_REPORTER_ID`
+    - `CODACY_PROJECT_TOKEN`
 
 ## [API Docs](./docs/index.md)
 
-[![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
 [![Issues][issues-image]][issues-url]
 [![Code maintainability][code-maintainability-image]][code-maintainability-url] [![Code issues][code-issues-image]][code-issues-url] [![Code Technical Debt][code-tech-debt-image]][code-tech-debt-url]
+
+[![Codacy Badge][codacy-imge]][codacy-url]
 
 [![Main Language][language-image]][code-metric-url] [![Languages][languages-image]][code-metric-url] [![Code Size][code-size-image]][code-metric-url] [![Repo-Size][repo-size-image]][code-metric-url]
 
 ## Features
 
-- TypeScript
-- Jest Snapshot/Unit Tests with Code Coverage
-- API Docs Generation
+- [TypeScript][typescript-url]
+- [Jest][jest-url] Unit Tests with Code Coverage
+- [API Docs Generation][api-url]
 - GitHub CI Integration (feature, development, master, release)
-- Travis Integration
-- CircleCI Integration
-- AppVeyor Integration
-- Code Quality via Code Climate
+- [Travis][travis-url] Integration
+- [CircleCI][circleci-url] Integration
+- [AppVeyor][appveyor-url] Integration
+- Code Quality via [Code Climate](./docs/CODECLIMATE.md) and [Codacy](./docs/CODACY.md)
 
 | GitHub                                                           | Travis                                                       | CircleCI                                                         | AppVeyor                                                         | Coveralls                                                                  |                                                                              |
 | ---------------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -38,50 +41,56 @@ Tools used for setting up a `repository`.
 ### Example
 
 ```sh
-npm start [owner]/[repo] [CC_TEST_REPORTER_ID]
+npm start [owner]/[repo] [CC_TEST_REPORTER_ID] [CODACY_PROJECT_TOKEN]
 ```
 
 ### Clone repository
 
-```
+```sh
 git clone https://github.com/gregoranders/ts-github-tools
 ```
 
 ### Install dependencies
 
-```
+```sh
 npm install
 ```
 
 ### Build
 
-```
+```sh
 npm run build
 ```
 
 ### Testing
 
-#### Test using [Jest](https://jestjs.io/)
+#### Test using [Jest][jest-url]
 
-```
+```sh
 npm test
 ```
 
 ### Code Climate Checks [docker required](docs/CODECLIMATE.md)
 
-```
+```sh
 npm run codeclimate
+```
+
+### Codacy Checks [docker required](docs/CODACY.md)
+
+```sh
+npm run codacy
 ```
 
 ### Run
 
-```
+```sh
 npm start
 ```
 
 ### Clear
 
-```
+```sh
 npm run clear
 ```
 
@@ -129,3 +138,8 @@ npm run clear
 [appveyor-url]: https://ci.appveyor.com/project/gregoranders/ts-github-tools
 [appveyor-master-image]: https://img.shields.io/appveyor/build/gregoranders/ts-github-tools/master
 [appveyor-development-image]: https://img.shields.io/appveyor/build/gregoranders/ts-github-tools/development
+[typescript-url]: http://www.typescriptlang.org/
+[jest-url]: https://jestjs.io/
+[codacy-imge]: https://app.codacy.com/project/badge/Grade/7cfaa91aecdb495f91547cdf731b3246
+[codacy-url]: https://app.codacy.com/gh/gregoranders/ts-github-tools
+[api-url]: https://api-extractor.com/
