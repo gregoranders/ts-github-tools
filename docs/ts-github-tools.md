@@ -4,11 +4,3 @@
 
 ## ts-github-tools package
 
-ts-github-tools
-
-## Functions
-
-|  Function | Description |
-|  --- | --- |
-|  [normalizeBranchName(branch)](./ts-github-tools.normalizebranchname.md) | normalize <code>branch name</code> |
-

@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [ts-github-tools](./ts-github-tools.md) | ts-github-tools |
+|  [ts-github-tools](./ts-github-tools.md) |  |
 

@@ -13,19 +13,19 @@
     "url": "git+https://github.com/gregoranders/ts-github-tools.git"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=12.0"
   },
   "private": false,
   "keywords": [
     "api-documenter",
     "api-extractor",
     "ci",
+    "github",
     "jest",
     "typescript"
   ],
-  "module": "dist/index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "type": "module",
   "files": [
     "dist",
     "docs",
@@ -33,24 +33,21 @@
     "SECURITY.md"
   ],
   "scripts": {
-    "clear": "rimraf ./dist/* ./temp/* ./node_modules ./package-lock.json",
+    "clear": "rimraf ./dist/* ./temp/* ./test/* ./node_modules ./package-lock.json ./docs-tmp/* ./etc/*",
     "start": "ts-node ./src/index.ts",
-    "prebuild": "eslint",
+    "prebuild": "eslint ./src/**/*.ts --quiet --fix",
     "build": "cross-env NODE_ENV=production tsc --project ./",
-    "lint": "eslint --ext .ts ./src",
+    "postbuild": "npm run docs",
+    "pretest": "rimraf ./test/*",
     "test": "jest",
     "watch": "tsc --watch --project ./",
-    "prepare": "npm test && npm run build && npm run api-extractor && npm run api-documenter",
+    "prepare": "husky install",
+    "docs": "npm run api-extractor && npm run api-documenter",
     "api-extractor": "api-extractor run --local --verbose",
-    "api-documenter": "api-documenter markdown --input ./docs --output ./docs-tmp && cpx 'docs-tmp/**/*.*' docs && rimraf ./docs-tmp",
-    "codeclimate": "docker run --interactive --tty --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze",
+    "api-documenter": "api-documenter markdown --input ./dist --output ./docs-tmp && cpx 'docs-tmp/**/*.*' docs",
+    "codeclimate": "docker run --interactive --rm --env CODECLIMATE_CODE=\"$PWD\" --volume \"$PWD\":/code --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp/cc:/tmp/cc codeclimate/codeclimate analyze",
+    "codacy": "docker run --interactive --rm --env CODACY_CODE=\"$PWD\" --volume \"$PWD\":\"$PWD\" --volume /var/run/docker.sock:/var/run/docker.sock --volume /tmp:/tmp codacy/codacy-analysis-cli analyze --directory \"$PWD\"",
     "changelog": "changelog"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && npm run prepare",
-      "pre-push": "npm run test"
-    }
   },
   "lint-staged": {
     "*.ts": [
@@ -59,19 +56,20 @@
   },
   "jest-html-reporter": {
     "pageTitle": "ts-github-tools",
-    "outputPath": "<rootDir>/temp/index.html"
+    "outputPath": "<rootDir>/test/index.html"
   },
   "jest-junit": {
-    "outputDirectory": "<rootDir>/temp"
+    "outputDirectory": "<rootDir>/test"
   },
   "jest": {
     "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/temp/coverage",
+    "coverageDirectory": "<rootDir>/test/coverage",
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.ts",
       "!<rootDir>/node_modules/**",
       "!<rootDir>/dist/**",
-      "!<rootDir>/temp/**"
+      "!<rootDir>/temp/**",
+      "!<rootDir>/test/**"
     ],
     "coverageReporters": [
       "lcovonly",
@@ -85,11 +83,6 @@
         "functions": 100,
         "lines": 100,
         "statements": 100
-      }
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
       }
     },
     "moduleFileExtensions": [
@@ -107,62 +100,44 @@
     },
     "testRegex": "/src/.*\\.spec\\.ts$"
   },
-  "eslintConfig": {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "prettier",
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended",
-      "prettier/@typescript-eslint"
-    ],
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {}
-    },
-    "rules": {},
-    "settings": {}
-  },
-  "prettier": {
-    "semi": true,
-    "trailingComma": "all",
-    "singleQuote": true,
-    "printWidth": 120,
-    "tabWidth": 2
-  },
   "dependencies": {
-    "@actions/core": "1.2.4",
-    "@actions/github": "3.0.0",
-    "@octokit/core": "3.0.0",
-    "@octokit/rest": "18.0.0"
+    "@actions/core": "1.6.0",
+    "@actions/github": "5.0.0",
+    "@octokit/core": "3.5.1",
+    "@octokit/rest": "18.12.0"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "7.8.12",
-    "@microsoft/api-extractor": "7.8.11",
-    "@types/jest": "26.0.0",
-    "@typescript-eslint/eslint-plugin": "3.2.0",
-    "@typescript-eslint/parser": "3.2.0",
+    "@commitlint/cli": "16.1.0",
+    "@commitlint/config-conventional": "16.0.0",
+    "@microsoft/api-documenter": "7.15.1",
+    "@microsoft/api-extractor": "7.19.4",
+    "@octokit/types": "6.34.0",
+    "@types/fancy-log": "1.3.1",
+    "@typescript-eslint/eslint-plugin": "5.10.2",
+    "@typescript-eslint/parser": "5.10.2",
     "cpx": "1.5.0",
-    "cross-env": "7.0.2",
-    "eslint": "7.2.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-prettier": "3.1.4",
+    "cross-env": "7.0.3",
+    "eslint": "8.8.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-jest": "26.0.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-unicorn": "40.1.0",
+    "fancy-log": "2.0.0",
     "generate-changelog": "1.8.0",
-    "husky": "4.2.5",
-    "jest": "26.0.1",
-    "jest-cli": "26.0.1",
-    "jest-html-reporter": "3.1.3",
-    "jest-junit": "10.0.0",
-    "jest-spec-reporter": "1.0.13",
-    "lint-staged": "10.2.10",
-    "prettier": "2.0.5",
+    "husky": "7.0.4",
+    "jest": "27.4.7",
+    "jest-cli": "27.4.7",
+    "jest-html-reporter": "3.4.2",
+    "jest-junit": "13.0.0",
+    "jest-spec-reporter": "1.0.17",
+    "lint-staged": "12.3.3",
+    "prettier": "2.5.1",
     "rimraf": "3.0.2",
-    "ts-jest": "26.1.0",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.5"
+    "ts-jest": "27.1.3",
+    "ts-node": "10.4.0",
+    "tsdef": "0.0.14",
+    "tweetnacl": "1.0.3",
+    "tweetsodium": "0.0.5",
+    "typescript": "4.5.5"
   }
 }
