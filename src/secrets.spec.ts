@@ -1,8 +1,20 @@
-import { client, context, key, mockedLog } from './fixtures/test-utils';
+import { client, context, mockedLog } from './fixtures/test-utils';
+
+import libsodium from 'libsodium-wrappers';
 
 import { create, ensure } from './secrets';
 
+const uint8Array2string = (buffer: Uint8Array) => Buffer.from(buffer).toString('base64');
+
 describe('ts-github-tools', () => {
+  const key = { key_id: '123', key: '' };
+
+  beforeAll(async () => {
+    await libsodium.ready;
+    const keyPair = libsodium.crypto_box_keypair();
+    key.key = uint8Array2string(keyPair.publicKey);
+  });
+
   describe('secrets', () => {
     const { repo, owner } = context;
     const secret = {
