@@ -126,7 +126,7 @@
     "eslint-plugin-unicorn": "45.0.2",
     "fancy-log": "2.0.0",
     "generate-changelog": "1.8.0",
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "jest": "29.3.1",
     "jest-cli": "29.3.1",
     "jest-html-reporter": "3.7.0",
