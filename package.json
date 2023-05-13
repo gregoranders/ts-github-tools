@@ -107,7 +107,7 @@
     "@octokit/rest": "19.0.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.3.0",
+    "@commitlint/cli": "17.5.1",
     "@commitlint/config-conventional": "17.4.0",
     "@microsoft/api-documenter": "7.19.27",
     "@microsoft/api-extractor": "7.33.7",
@@ -135,7 +135,7 @@
     "libsodium-wrappers": "0.7.10",
     "lint-staged": "13.1.0",
     "prettier": "2.8.7",
-    "rimraf": "3.0.2",
+    "rimraf": "5.0.0",
     "ts-jest": "29.0.3",
     "ts-node": "10.9.1",
     "tsdef": "0.0.14",
