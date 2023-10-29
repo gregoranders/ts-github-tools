@@ -2,16 +2,16 @@
 
 ## Docker image sizes
 
-```sh
-codeclimate/codeclimate              110MB
-codeclimate/codeclimate-eslint       1.25GB
-codeclimate/codeclimate-structure    5.16GB
-codeclimate/codeclimate-duplication  5.16GB
-codeclimate/codeclimate-tslint       559MB
-codeclimate/codeclimate-editorconfig 74.1MB
-codeclimate/codeclimate-fixme        58.8MB
-codeclimate/codeclimate-git-legal    373MB
-```
+| Image                                | Size   |
+| :----------------------------------- | -----: |
+| codeclimate/codeclimate              |  143MB |
+| codeclimate/codeclimate-duplication  | 6.07GB |
+| codeclimate/codeclimate-editorconfig | 74.1MB |
+| codeclimate/codeclimate-eslint       | 1.44GB |
+| codeclimate/codeclimate-fixme        | 64.8MB |
+| codeclimate/codeclimate-git-legal    |  373MB |
+| codeclimate/codeclimate-markdownlint |  392MB |
+| codeclimate/codeclimate-structure    | 6.05GB |
 
 ### Initial docker images
 
