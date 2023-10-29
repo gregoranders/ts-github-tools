@@ -4,7 +4,7 @@
  *
  * @packageDocumentation
  */
-import tweetsodium from 'tweetsodium';
+import libsodium from 'libsodium-wrappers';
 import { ClientType, Context, create as commonCreate, ensure as commonEnsure } from './common';
 
 export type Secret = {
@@ -18,10 +18,11 @@ const string2uint8Array = (text: string) => Uint8Array.from(text.split('').map((
 export const create = (client: ClientType, context: Context, secret: Secret): Promise<void> => {
   const { owner, repo } = context;
   return commonCreate(context, secret, 'secret', async () => {
+    await libsodium.ready;
     const key = await client.rest.actions.getRepoPublicKey({ owner, repo });
     const messageBytes = string2uint8Array(secret.name);
     const keyBytes = new Uint8Array(Buffer.from(key.data.key, 'base64'));
-    const encryptedBytes = tweetsodium.seal(messageBytes, keyBytes);
+    const encryptedBytes = libsodium.crypto_box_seal(messageBytes, keyBytes);
     const encrypted_value = Buffer.from(encryptedBytes).toString('base64');
     return client.rest.actions.createOrUpdateRepoSecret({
       owner,

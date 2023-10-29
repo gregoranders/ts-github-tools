@@ -1,17 +1,10 @@
 // import { getOctokit } from '@actions/github';
-import tweetnacl from 'tweetnacl';
 
 import { OctokitOptions } from '@octokit/core/dist-types/types';
 
 import { Endpoints } from '@octokit/types';
 
 import { DeepPartial } from 'tsdef';
-
-const keyPair = tweetnacl.box.keyPair();
-
-const uint8Array2string = (buffer: Uint8Array) => Buffer.from(buffer).toString('base64');
-
-export const key = { key_id: '123', key: uint8Array2string(keyPair.publicKey) };
 
 export const mockedSetToken = jest.fn();
 
