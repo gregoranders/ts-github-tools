@@ -110,7 +110,7 @@
     "@commitlint/cli": "18.2.0",
     "@commitlint/config-conventional": "18.1.0",
     "@microsoft/api-documenter": "7.23.9",
-    "@microsoft/api-extractor": "7.38.0",
+    "@microsoft/api-extractor": "7.38.2",
     "@octokit/types": "12.1.1",
     "@types/fancy-log": "2.0.1",
     "@types/jest": "29.5.6",
