@@ -109,7 +109,7 @@
   "devDependencies": {
     "@commitlint/cli": "18.4.3",
     "@commitlint/config-conventional": "18.4.3",
-    "@microsoft/api-documenter": "7.23.14",
+    "@microsoft/api-documenter": "7.23.16",
     "@microsoft/api-extractor": "7.38.5",
     "@octokit/types": "12.4.0",
     "@types/fancy-log": "2.0.2",
